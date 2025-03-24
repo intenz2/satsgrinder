@@ -43,5 +43,11 @@ cd %FOLDER_NAME%
 echo Starte XMRig...
 xmrig.exe -o %POOL% -u %WALLET% -p %PASSWORD% --tls
 
+:: Überprüfung auf Fehler oder Beendigung des Miners
+if %errorlevel% neq 0 (
+    echo Der Miner wurde beendet oder ein Fehler ist aufgetreten.
+    pause
+)
+
 :: Konsole geöffnet lassen
 pause
