@@ -1,4 +1,21 @@
 @echo off
+:: Überprüfen, ob curl und tar installiert sind
+where curl >nul 2>&1
+if %errorlevel% neq 0 (
+    echo Installiere curl...
+    powershell -Command "Invoke-WebRequest -Uri https://curl.se/windows/dl-7.88.1/curl-7.88.1-win64-mingw.zip -OutFile curl.zip"
+    powershell -Command "Expand-Archive -Path curl.zip -DestinationPath ."
+    set PATH=%CD%\curl-7.88.1-win64-mingw\bin;%PATH%
+    del curl.zip
+)
+
+where tar >nul 2>&1
+if %errorlevel% neq 0 (
+    echo Installiere tar...
+    powershell -Command "Install-Package -Name tar -ProviderName NuGet -Force -DestinationPath ."
+    set PATH=%CD%;%PATH%
+)
+
 :: URL der XMRig-Version
 set DOWNLOAD_URL=https://github.com/xmrig/xmrig/releases/download/v6.20.0/xmrig-6.20.0-win64.zip
 
