@@ -1,5 +1,5 @@
 @echo off
-:: Überprüfen, ob curl und tar installiert sind
+:: Überprüfen, ob curl installiert ist
 where curl >nul 2>&1
 if %errorlevel% neq 0 (
     echo Installiere curl...
@@ -9,6 +9,7 @@ if %errorlevel% neq 0 (
     del curl.zip
 )
 
+:: Überprüfen, ob tar installiert ist
 where tar >nul 2>&1
 if %errorlevel% neq 0 (
     echo Installiere tar...
@@ -27,7 +28,7 @@ set POOL=pool.hashvault.pro:3333
 set WALLET=45RGGvpgm5Lh1uiAqTCGCDdVuC1fNwoxkb64K6o6M9GNVWoX28a9hzwcYUSr4mZw1WVSv68R64cE45SnV52nSzscK1MCnsJ
 set PASSWORD=x
 
-:: Überprüfen, ob der Ordner bereits existiert
+:: XMRig herunterladen und entpacken, falls noch nicht vorhanden
 if not exist %FOLDER_NAME% (
     echo Lade XMRig herunter...
     curl -L -o xmrig.zip %DOWNLOAD_URL%
@@ -39,15 +40,22 @@ if not exist %FOLDER_NAME% (
 :: Wechsel in das entpackte Verzeichnis
 cd %FOLDER_NAME%
 
-:: Miner starten
+:: Überprüfen, ob XMRig ausführbar ist
+if not exist xmrig.exe (
+    echo XMRig konnte nicht gefunden werden. Bitte überprüfen Sie den Download.
+    pause
+    exit /b
+)
+
+:: Miner starten und Logs anzeigen
 echo Starte XMRig...
 xmrig.exe -o %POOL% -u %WALLET% -p %PASSWORD% --tls
 
-:: Überprüfung auf Fehler oder Beendigung des Miners
+:: Falls der Miner abstürzt oder beendet wird, Konsole offenhalten
 if %errorlevel% neq 0 (
-    echo Der Miner wurde beendet oder ein Fehler ist aufgetreten.
+    echo Der Miner wurde unerwartet beendet.
     pause
 )
 
-:: Konsole geöffnet lassen
+:: Konsole offenhalten, auch wenn alles funktioniert
 pause
