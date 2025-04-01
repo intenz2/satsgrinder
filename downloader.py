@@ -7,7 +7,7 @@ import io
 REPO_OWNER = "intenzdev"
 REPO_NAME = "satsgrinder"
 BRANCH = "codespace-1"
-FOLDER = "AAA"
+FOLDER = "aaa"
 
 # GitHub-API-URL, um den Branch als ZIP-Datei herunterzuladen
 ZIP_URL = f"https://github.com/{REPO_OWNER}/{REPO_NAME}/archive/refs/heads/{BRANCH}.zip"
