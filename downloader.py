@@ -4,7 +4,7 @@ import zipfile
 import io
 
 # Repository-Informationen
-REPO_OWNER = "intenzdev"
+REPO_OWNER = "intenz2"
 REPO_NAME = "satsgrinder"
 BRANCH = "codespace-1"
 FOLDER = "aaa"
