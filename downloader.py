@@ -6,7 +6,7 @@ import io
 # Repository-Informationen
 REPO_OWNER = "intenzdev"
 REPO_NAME = "satsgrinder"
-BRANCH = "codespace-ominous-space-engine-96545xp77xhpgwg"
+BRANCH = "codespace-1"
 FOLDER = "AAA"
 
 # GitHub-API-URL, um den Branch als ZIP-Datei herunterzuladen
